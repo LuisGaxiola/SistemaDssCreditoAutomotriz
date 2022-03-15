@@ -37,8 +37,8 @@ const store = useStore()
   --green: #20c060e6;
   --blue: #00266de6;
   --red: #ff6060e6;
-  --purple: #77216fe6;
-  --pink: #b3004be6;
+  --purple: #702177e6;
+  --pink: #b30027e6;
   --orange: #ff8040e6;
 }
 @keyframes changeColor {
@@ -53,6 +53,6 @@ const store = useStore()
   }
 }
 .custom-bg {
-  animation: changeColor 8s linear infinite;
+  animation: changeColor 6s ease-in infinite;
 }
 </style>
