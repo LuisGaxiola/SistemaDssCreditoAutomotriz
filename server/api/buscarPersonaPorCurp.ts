@@ -20,7 +20,7 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
         domicilio: 'Calle 5, Guasave, Sinaloa.',
     }
   ]
-  // await main()
+  await main()
   const body = await useBody(req)
   return personas.find(persona => persona.curp === body)
 }
