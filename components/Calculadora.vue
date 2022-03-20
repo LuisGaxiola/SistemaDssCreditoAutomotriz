@@ -26,6 +26,7 @@ const planSugerido = computed(() => {
   else if (ingresosAcumulables.value >= 18001) { return 4 }
 })
 const planSugeridoNombre = computed(() => planes.data.value[planSugerido.value - 1].nombre)
+
 watch(curp, async () => {
   nombre.value = undefined
   domicilio.value = undefined
@@ -107,7 +108,8 @@ function reiniciar () {
     <div v-else-if="pasoActual === 3" class="gap-2">
       <div class="font-bold text-2xl">Resumen de la adquisición del plan automotriz:</div>
       <br>
-      <div><span class="font-bold">Plan sugerido:</span> _____ {{ planSugeridoNombre }}  ____________________ (APARECER AUTOMATICAMENTE)</div>
+      <div><Input title="Plan Sugerido" type="text" v-model="planSugeridoNombre" disabled />(APARECER AUTOMATICAMENTE)</div>
+      
       <div><span class="font-bold">Clave del auto:</span> L1</div>
       <div><span class="font-bold">Tipo de auto:</span> SENTRA</div>
       <div><span class="font-bold">Valor comercial:</span> 300,000.00</div>
