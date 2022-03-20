@@ -8,14 +8,15 @@
   "dependencies": {
     "@iconify-json/carbon": "^1.1.1",
     "@pinia/nuxt": "^0.1.8",
-    "@prisma/client": "^3.10.0",
+    "@prisma/client": "^3.11.0",
     "@types/mssql": "^7.1.5",
     "@unocss/nuxt": "^0.28.1",
     "@unocss/preset-icons": "^0.28.1",
     "@unocss/reset": "^0.28.1",
     "@vueuse/nuxt": "^8.0.1",
+    "mariadb": "^3.0.0",
     "mssql": "^8.0.2",
-    "nuxt3": "3.0.0-27454426.4cefce4",
-    "pinia": "^2.0.11"
+    "nuxt3": "3.0.0-27456065.f38cace",
+    "pinia": "^2.0.12"
   }
 }
