@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const nombreAgencia = ref('Agencia Automotriz Tesla')
-const sloganAgencia = ref('Más cosas a peores precios')
+const sloganAgencia = ref('Más cosas a peores precios ♪')
 const pasoActual = ref(1)
 const planes = await useFetch('/api/buscarPlanes')
 const fecha = useDateFormat(useNow(),'DD/MM/YYYY')
@@ -55,7 +55,7 @@ function reiniciar () {
         <div class="font-bold">{{ nombreAgencia }}</div>
         <div class="text-4xl i-carbon-car" />
       </div>
-      <div class="text-xl">{{ sloganAgencia }}</div>
+      <div class="text-xl">"{{ sloganAgencia }}"</div>
     </div>
     <div v-if="pasoActual === 1">
       <div class="font-bold text-2xl">Nuestros planes de financiamiento:</div>
