@@ -8,14 +8,14 @@ const store = useStore()
 <template>
   <div class="sticky top-0 z-10 custom-bg backdrop-filter backdrop-blur-sm text-white text-xl">
     <div class="flex items-center justify-between p-4 py-2">
-      <div class="text-2xl font-bold">{{ store.title }}</div>
+      <div class="text-2xl font-black tracking-wider">{{ store.title }}</div>
       <button class="!outline-none" @click="off">
         <div v-if="dark" i-carbon-moon />
         <div v-else i-carbon-sun />
       </button>
     </div>
     <div class="flex justify-between items-center p-4 py-2">
-      <div class="flex gap-9">
+      <div class="flex gap-9  tracking-widest">
         <nuxt-link to="/" class="flex items-center gap-2">
           <div>Inicio</div>
           <div class="i-carbon-home" />

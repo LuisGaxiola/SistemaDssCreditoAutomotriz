@@ -2,7 +2,7 @@
 const nombreAgencia = ref('Agencia Automotriz Tesla')
 const sloganAgencia = ref('Más cosas a peores precios ♪')
 const pasoActual = ref(1)
-const planes = await useFetch('/api/buscarPlanes')
+const planes = await useFetch('/api/planes')
 const fecha = useDateFormat(useNow(),'DD/MM/YYYY')
 const curp = refDefault(ref(''),'')
 const nombre = refDefault(ref(''),'')
@@ -31,7 +31,7 @@ watch(curp, async () => {
   nombre.value = undefined
   domicilio.value = undefined
   if (curp.value.length === 18) {
-    const persona = await useFetch('/api/buscarPersonaPorCurp', { method: 'post', body: curp.value })
+    const persona = await useFetch('/api/personas', { method: 'post', body: curp.value })
     nombre.value = persona.data.value.nombre || ''
     domicilio.value = persona.data.value.domicilio || ''
   }
@@ -52,14 +52,14 @@ function reiniciar () {
 <template>
   <Card :key="key">
     <div class="mb-6 text-3xl">
-      <div class="flex items-center gap-2">
-        <div class="font-bold">{{ nombreAgencia }}</div>
+      <div class="flex items-center font-black gap-2">
+        <div>{{ nombreAgencia }}</div>
         <div class="text-4xl i-carbon-car" />
       </div>
-      <div class="text-xl">"{{ sloganAgencia }}"</div>
+      <div class="text-xl font-medium">"{{ sloganAgencia }}"</div>
     </div>
     <div v-if="pasoActual === 1">
-      <div class="font-bold text-2xl">Nuestros planes de financiamiento:</div>
+      <div class="font-black text-2xl">Nuestros planes de financiamiento:</div>
       <div class="grid grid-cols-2 gap-4 my-4">
         <div
           v-for="(plan, index) in planes.data.value"
@@ -96,7 +96,7 @@ function reiniciar () {
           <div>Casado</div>
         </div>
       </div>
-      <Input title="Hijos" type="number" min="0" v-model="hijos" />
+      <Input title="Hijos" type="number" min="0" v-model="hijos" :disabled="estadoCivil == 'soltero'" />
       <Input title="Ingresos mensuales" type="number" min="0" v-model="ingresosMensuales" />
       <Input title="Ingresos acumulables" type="number" disabled v-model="ingresosAcumulables" />
       <Input title="Plan recomendado" type="text" disabled v-model="planSugeridoNombre" class="text-white font-semibold tracking-wider" :style="{ backgroundColor: planes.data.value[planSugerido-1].color }" />
@@ -106,7 +106,7 @@ function reiniciar () {
       </div>
     </div>
     <div v-else-if="pasoActual === 3" class="gap-2">
-      <div class="font-bold text-2xl">Resumen de la adquisición del plan automotriz:</div>
+      <div class="font-black text-2xl">Resumen de la adquisición del plan automotriz:</div>
       <br>
       <div><Input title="Plan Sugerido" type="text" v-model="planSugeridoNombre" disabled />(APARECER AUTOMATICAMENTE)</div>
       
@@ -126,7 +126,7 @@ function reiniciar () {
       </div>
     </div>
     <div v-else-if="pasoActual === 4" class="gap-2">
-      <div class="font-bold text-2xl">Impresión de fichas de pago:</div>
+      <div class="font-black text-2xl">Impresión de fichas de pago:</div>
       <br>
       <div class="custom-bg p-4 rounded text-white">
         <div>Ficha de pago. Fecha: 09/03/2021</div>
