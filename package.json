@@ -6,17 +6,16 @@
     "start": "node .output/server/index.mjs"
   },
   "dependencies": {
-    "@iconify-json/carbon": "^1.1.1",
+    "@iconify-json/carbon": "^1.1.2",
+    "@iconify-json/mdi": "^1.1.5",
     "@pinia/nuxt": "^0.1.8",
-    "@prisma/client": "^3.11.0",
-    "@types/mssql": "^7.1.5",
-    "@unocss/nuxt": "^0.28.1",
-    "@unocss/preset-icons": "^0.28.1",
-    "@unocss/reset": "^0.28.1",
-    "@vueuse/nuxt": "^8.0.1",
+    "@unocss/nuxt": "^0.30.6",
+    "@unocss/preset-icons": "^0.30.6",
+    "@unocss/reset": "^0.30.6",
+    "@vueuse/nuxt": "^8.2.0",
     "mariadb": "^3.0.0",
-    "mssql": "^8.0.2",
-    "nuxt3": "3.0.0-27456065.f38cace",
-    "pinia": "^2.0.12"
+    "nuxt3": "3.0.0-27474800.8dd77d7",
+    "pinia": "^2.0.12",
+    "zod": "^3.14.3"
   }
 }
