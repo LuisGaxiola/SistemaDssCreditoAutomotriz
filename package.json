@@ -7,14 +7,15 @@
   },
   "dependencies": {
     "@iconify-json/carbon": "^1.1.2",
+    "@iconify-json/mdi": "^1.1.5",
     "@pinia/nuxt": "^0.1.8",
-    "@prisma/client": "^3.11.0",
-    "@unocss/nuxt": "^0.29.5",
-    "@unocss/preset-icons": "^0.29.5",
-    "@unocss/reset": "^0.29.5",
-    "@vueuse/nuxt": "^8.1.2",
+    "@unocss/nuxt": "^0.30.6",
+    "@unocss/preset-icons": "^0.30.6",
+    "@unocss/reset": "^0.30.6",
+    "@vueuse/nuxt": "^8.2.0",
     "mariadb": "^3.0.0",
-    "nuxt3": "3.0.0-27460489.53fbca7",
-    "pinia": "^2.0.12"
+    "nuxt3": "3.0.0-27474800.8dd77d7",
+    "pinia": "^2.0.12",
+    "zod": "^3.14.3"
   }
 }

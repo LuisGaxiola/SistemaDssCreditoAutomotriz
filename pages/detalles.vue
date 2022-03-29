@@ -2,7 +2,7 @@
   <div>
     <Card>
       <div class="font-bold">Sistema DSS para crédito automotriz</div>
-      <div>Versión: 1.0.0</div>
+      <div>Versión: 0.8.0</div>
       <br>
       <div class="font-bold">Herramientas utlilizadas:</div>
       <ul>
@@ -13,7 +13,7 @@
           <li>Fluent Design System (Microsoft)</li>
           <li>Carbon Design System (IBM)</li>
           <li>Material Design (Google)</li>
-          <li>Microsoft SQL Server</li>
+          <li>Oracle MySQL</li>
       </ul>
     </Card>
   </div>

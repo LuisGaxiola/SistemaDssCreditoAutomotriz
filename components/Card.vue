@@ -1,8 +1,19 @@
+<script setup lang="ts">
+const props = withDefaults(defineProps<{
+  theme?: 'normal' | 'inverted'
+}>(), {
+  theme: 'normal'
+})
+</script>
+
 <template>
-  <div class="bg-white dark:bg-dark-600 dark:text-white rounded-md overflow-hidden">
-    <div class="p-4">
-      <slot />
-    </div>
-    <div class="h-3 w-full custom-bg" />
+  <div
+    class="rounded-md p-4"
+    :class="{
+      'bg-white dark:bg-dark-600 text-black dark:text-white': theme === 'normal',
+      'bg-dark-600 dark:bg-white text-white dark:text-black': props.theme === 'inverted'
+    }"
+  >
+    <slot />
   </div>
 </template>
