@@ -2,6 +2,7 @@ import mariadb from 'mariadb'
 const mariaPool = mariadb.createPool({
   host: 'localhost',
   user: 'root',
+  password: 'root1234',
   database: 'sistema_credito_automotriz',
   connectionLimit: 5
 });
@@ -21,6 +22,41 @@ const dummyPersonas: persona[] = [
     curp: 'GALL020308HSLXPSA3',
     nombre: 'Jose Juan',
     domicilio: 'Calle 5, Guasave, Sinaloa.',
+  },
+  {
+    curp: 'HERJ001009MSLRDZA5',
+    nombre: 'Jazmin Guadalupe Hernandez Rodriguez',
+    domicilio: 'Calle coral, Guasave, Sinaloa.',
+  },
+  {
+    curp: 'JURA010610HSLRMBA8',
+    nombre: 'Jose Abel Juarez Ramirez',
+    domicilio: 'Calle manabi, Guasave, Sinaloa.',
+  },
+  {
+    curp: 'VAFJ000913HSLLLNA0',
+    nombre: 'Juan Manuel Valdez Felix',
+    domicilio: 'Calle Manzana, Guasave, Sinaloa.',
+  },
+  {
+    curp: 'FERJ010909MSLLJNA1',
+    nombre: 'Jennifer Eliany Felix Rejon',
+    domicilio: 'Calle quimica, Guasave, Sinaloa.',
+  },
+  {
+    curp: 'AOGM010908HSLCNRA4',
+    nombre: 'Mario Daniel Acosta Gonzalez',
+    domicilio: 'Calle Naranjo, Guasave, Sinaloa.',
+  },
+  {
+    curp: 'REGM991118HSLYRR08',
+    nombre: 'Marco Antonio Reyes Garcia',
+    domicilio: 'Calle quimica, Guasave, Sinaloa.',
+  },
+  {
+    curp: 'SORJ961006HSLBBS09',
+    nombre: 'Jesus Gabriel Soberanes Rubio',
+    domicilio: 'Calle quimica, Guasave, Sinaloa.',
   }
 ]
 export async function createPersonasTable() {
@@ -165,6 +201,31 @@ const dummyAutos: auto[] = [
     nombre: "Nissan Sentra 2022",
     valorComercial: 364000,
     urlImagen: "nissan_sentra_2022.jpg"
+  },
+  {
+    nombre: "BMW Serie 7 xDrive",
+    valorComercial: 4190000.00,
+    urlImagen: "BMW_Serie_7_xDrive.jpg"
+  },
+  {
+    nombre: "Mercedes-AMG GT R",
+    valorComercial: 4538900.00,
+    urlImagen: "Mercedes_AMG_GT_R.jpg"
+  },
+  {
+    nombre: "Bentley Continental GT V8",
+    valorComercial: 5822199.00,
+    urlImagen: "Bentley_Continental_GT_V8.jpg"
+  },
+  {
+    nombre: "Lamborghini Aventador S",
+    valorComercial: 8272954.00,
+    urlImagen: "Lamborghini_Aventador_S.jpg"
+  },
+  {
+    nombre: "Ferrari SF90 Spyder",
+    valorComercial: 9518330.00,
+    urlImagen: "Ferrari_SF90_Spyder.jpg"
   }
 ]
 

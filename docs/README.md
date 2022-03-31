@@ -1,4 +1,0 @@
-- acompletar registros de 20 personas
-- validaciones básicas, usar zod
-- acompletar registros de 20 autos?
-- implementar un login?

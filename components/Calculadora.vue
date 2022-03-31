@@ -206,9 +206,9 @@ function dinero(money: number) {
           <option v-for="auto in getAutosByPlan(planSugerido)" :value="auto.clave">{{ auto.nombre }}</option>
         </select>
       </div>
-      <div v-if="idAutoSeleccionado > 0" class="flex flex-col justify-between sm:flex-row-reverse">
-        <div>
-          <img class="w-full" :src="`/${autoSeleccionado.urlImagen}`" :alt="autoSeleccionado.nombre" />
+      <div v-if="idAutoSeleccionado > 0" class="flex flex-col justify-between sm:flex-row-reverse gap-2">
+        <div class=" w-full sm:w-1/2">
+          <img class="rounded-md w-full" :src="`/${autoSeleccionado.urlImagen}`" :alt="autoSeleccionado.nombre" />
         </div>
         <div>
           <div>
