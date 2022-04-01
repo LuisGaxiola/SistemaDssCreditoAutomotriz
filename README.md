@@ -11,7 +11,8 @@ yarn build
 
 # To Do
 - acompletar registros de 20 personas
-- buscar 5 carros mas
+- acempletar registros de 5 carros cada plan
 - buscar imagenes de calidad
 - validaciones básicas, usar zod
 - implementar un login?
+- implementar versin de produccion

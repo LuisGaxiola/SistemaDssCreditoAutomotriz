@@ -183,9 +183,9 @@ const dummyAutos: auto[] = [
     urlImagen: "nissan_kicks_2022.jpg"
   },
   {
-    nombre: "Nissan Altima 2022",
-    valorComercial: 692000,
-    urlImagen: "nissan_altima_2022.jpeg"
+    nombre: "Tesla Model Y",
+    valorComercial: 1418300,
+    urlImagen: "Tesla_Model_Y.jpeg"
   },
   {
     nombre: "Nissan Frontier V6 Pro-4X 2022",
@@ -226,6 +226,41 @@ const dummyAutos: auto[] = [
     nombre: "Ferrari SF90 Spyder",
     valorComercial: 9518330.00,
     urlImagen: "Ferrari_SF90_Spyder.jpg"
+  },
+  {
+    nombre: "Renault Kwid",
+    valorComercial: 181500.00,
+    urlImagen: "Renault_Kwid.jpeg"
+  },
+  {
+    nombre: "Chevrolet Beat",
+    valorComercial: 197400.00,
+    urlImagen: "ChevroletBeat.jpg"
+  },
+  {
+    nombre: "Hyundai Grand i10",
+    valorComercial: 201300.00,
+    urlImagen: "Hyundai_Grand_i10.jpg"
+  },
+  {
+    nombre: "Nissan V-Drive",
+    valorComercial: 203900.00,
+    urlImagen: "Nissan_V_Drive.jpg"
+  },
+  {
+    nombre: "Volkswagen Gol",
+    valorComercial: 205990.00,
+    urlImagen: "Volkswagen_Gol.jpg"
+  },
+  {
+    nombre: "Chevrolet Beat Notchback",
+    valorComercial: 206800.00,
+    urlImagen: "Chevrolet_Beat_Notchback.jpg"
+  },
+  {
+    nombre: "Sentra sense MT 22",
+    valorComercial: 363900.00,
+    urlImagen: "Sentra_sense_MT_22.jpg"
   }
 ]
 
