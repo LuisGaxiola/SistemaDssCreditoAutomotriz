@@ -25,7 +25,7 @@ function updateValue(event: Event) {
       v-bind="$attrs"
       :value="props.modelValue"
       @input="updateValue"
-      class="bg-gray-200 text-black rounded p-4 w-full"
+      class="block bg-gray-200 text-black rounded p-4 w-full"
       :class="{ 'cursor-not-allowed': attrs.disabled }"
     />
   </div>

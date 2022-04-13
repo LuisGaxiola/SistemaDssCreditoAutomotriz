@@ -3,10 +3,23 @@
 const slots = useSlots()
 const target = ref(null)
 const targetBounding = useElementBounding(target)
-
 const windowSize = useWindowSize()
 const menu = ref(null)
-const { isOutside } = useMouseInElement(menu)
+const menuBounding = useElementBounding(menu)
+const { x, y, sourceType } = useMouse()
+// const { isOutside } = useMouseInElement(menu)
+const isOutside = computed(() => {
+  const { left, top, width, height } = menuBounding
+  const { width: windowWidth, height: windowHeight } = windowSize
+  return (
+    x.value < left.value ||
+    x.value > left.value + width.value ||
+    y.value < top.value ||
+    y.value > top.value + height.value ||
+    sourceType.value !== 'mouse' ||
+    (windowWidth.value < left.value + width.value && windowHeight.value < top.value + height.value)
+  )
+})
 const isTargetFullyVisible = computed(() => targetBounding.bottom.value > windowSize.height.value)
 </script>
 

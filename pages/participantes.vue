@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <Card>
-      <Autores />
-    </Card>
-  </div>  
+  <Card>
+    <Autores />
+  </Card> 
 </template>

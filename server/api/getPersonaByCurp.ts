@@ -4,7 +4,7 @@ import {  IncomingMessage, ServerResponse } from 'http'
 
 export default async (req: IncomingMessage, res: ServerResponse) => {
     await data.createPersonasTable()
-    await data.insertDummyPersonas()
+    await data.insertPersonas()
     const curp = await useBody(req)
     return data.selectPersonaByCurp(curp)
   }

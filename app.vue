@@ -1,12 +1,16 @@
 <script setup lang="ts">
 const store = useStore()
-useMeta({
-  title: store.title,
+const colorPrimary = ref('#808080')
+const colorPrimaryTransparent = computed(() => `${colorPrimary.value}cc`)
+const colorSecondary = ref('#404040')
+const colorSecondaryTransparent = computed(() => `${colorSecondary.value}cc`)
+useHead({
+  title: store.state.title,
   bodyAttrs: {
     class: 'bg-gray-300 dark:bg-black'
   },
   meta: [
-    { name: 'theme-color', content: '#60009b' }
+    { name: 'theme-color', content: colorPrimary.value }
   ],
   link: [
     { rel: 'icon', href: '/favicon.svg' }
@@ -18,60 +22,38 @@ useMeta({
   <div>
     <NuxtLayout>
       <Header />
-      <NuxtPage class="p-4" />
+      <NuxtPage class="my-4" />
     </NuxtLayout>
   </div>
 </template>
 
 <style>
-:root {
-  --red: #ef0040cc;
-  --blue: #4960bbcc;
-  --purple: #8020bbcc;
-  --pink: #e02080cc;
-}
-
 * {
   letter-spacing: 0.05em;
 }
 
 @keyframes standard {
   0% {
-    background-color: var(--pink);
+    background-color: v-bind(colorPrimaryTransparent);
   }
   50% {
-    background-color: var(--purple);
+    background-color: v-bind(colorSecondaryTransparent);
   }
   100% {
-    background-color: var(--pink);
+    background-color: v-bind(colorPrimaryTransparent);
   }
 }
 
-@keyframes alternative {
-  0% {
-    background-color: var(--red);
-  }
-  25% {
-    background-color: var(--blue);
-  }
-  50% {
-    background-color: var(--purple);
-  }
-  75% {
-    background-color: var(--pink);
-  }
-  100% {
-    background-color: var(--red);
-  }
-}
-
-.custom-bg {
-  animation: standard 6s linear infinite;
+.bg-custom {
+  animation: standard 6s ease infinite;
 }
 
 ::selection {
-  color: white;
-  background-color: var(--purple);
+  @apply bg-dark-900 text-white dark:(bg-light-200 text-black);
+}
+
+button {
+  @apply bg-dark-900 text-white flex items-center gap-2 dark:(bg-light-200 text-black) p-3 rounded font-semibold tracking-widest !important;
 }
 
 li {

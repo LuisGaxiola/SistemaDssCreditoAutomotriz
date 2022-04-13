@@ -1,25 +1,109 @@
 import mariadb from 'mariadb'
-const mariaPool = mariadb.createPool({
+
+const dbAbel = {
   host: 'localhost',
   user: 'root',
   password: 'root1234',
   database: 'sistema_credito_automotriz',
   connectionLimit: 5
-});
+}
+
+const dbLuis = {
+  host: 'localhost',
+  user: 'root',
+  database: 'sistema_credito_automotriz',
+  connectionLimit: 5
+}
+
+const mariaPool = mariadb.createPool(dbLuis);
+
+export type usuario = {
+  id?: number,
+  nombre: string,
+  login: string,
+  password: string
+}
+
+const Usuarios: usuario[] = [
+  {
+    nombre: 'Jazmin Guadalupe',
+    login: 'jazz',
+    password: 'jazminpass'
+  },
+  {
+    nombre: 'Jennifer Elena',
+    login: 'jennifer',
+    password: 'jennnnifer'
+  },
+  {
+    nombre: 'María Lourdes',
+    login: 'lourdes',
+    password: 'lourdespass'
+  },
+  {
+    nombre: 'Jose Abel',
+    login: 'abel',
+    password: 'lkksxd'
+  },
+  {
+    nombre: 'Juan Manuel',
+    login: 'juan',
+    password: 'juanma'
+  },
+  {
+    nombre: 'Luis',
+    login: 'luis',
+    password: 'luis321'
+  },
+]
+
+export function createUsuariosTable () {
+  return mariaPool.query(`CREATE TABLE IF NOT EXISTS usuarios (
+  id INT NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(255) NOT NULL,
+  login VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id)
+)`)
+}
+
+export async function insertUsuarios () {
+  await mariaPool.query(`TRUNCATE TABLE usuarios`)
+  let query = `INSERT INTO usuarios (nombre, login, password) VALUES `
+  Usuarios.forEach((usuario, index) => {
+    query += `('${usuario.nombre}', '${usuario.login}', '${usuario.password}')`
+    if (index < Usuarios.length - 1) {
+      query += ', '
+    }
+  })
+  await mariaPool.query(query)
+}
+
+export async function selectUsuarioByLogin (login: string) {
+  const [result] = await mariaPool.query(`
+    SELECT * FROM usuarios
+    WHERE login = ?
+  `, [login])
+  return result as usuario
+}
+
+export function selectUsuarios () {
+  return mariaPool.query(`SELECT * FROM usuarios`)
+}
 
 type persona = {
   curp: string,
   nombre: string,
   domicilio: string,
 }
-const dummyPersonas: persona[] = [
+const Personas: persona[] = [
   {
     curp: 'GALL020308HSLXPSA4',
     nombre: 'Jose Luis',
     domicilio: 'Calle 5, Guasave, Sinaloa.',
   },
   {
-    curp: 'GALL020308HSLXPSA3',
+    curp: 'GALL520308HSLXPSA3',
     nombre: 'Jose Juan',
     domicilio: 'Calle 5, Guasave, Sinaloa.',
   },
@@ -69,13 +153,13 @@ export async function createPersonasTable() {
 );`)
   conn.end()
 }
-export async function insertDummyPersonas() {
+export async function insertPersonas() {
   const conn = await mariaPool.getConnection()
   await conn.query(`TRUNCATE TABLE personas`)
   let query = `INSERT INTO personas (curp, nombre, domicilio) VALUES `
-  dummyPersonas.forEach((persona, index) => {
+  Personas.forEach((persona, index) => {
     query += `('${persona.curp}', '${persona.nombre}', '${persona.domicilio}')`
-    if (index !== dummyPersonas.length - 1) { query += ',' }
+    if (index !== Personas.length - 1) { query += ',' }
   })
   await conn.query(query)
   conn.end()
@@ -94,7 +178,7 @@ type plan = {
   valorMinimo: number,
   valorMaximo: number,
 }
-const dummyPlanes: plan[] = [
+const Planes: plan[] = [
   {
     nombre: 'Todos pueden',
     color: '#ef0040',
@@ -134,20 +218,20 @@ export async function createPlanesTable() {
 );`)
   conn.end()
 }
-export async function insertDummyPlanes() {
+export async function insertPlanes() {
   const conn = await mariaPool.getConnection()
   await conn.query(`TRUNCATE TABLE planes`)
   let query = `INSERT INTO planes (nombre, color, valorMinimo, valorMaximo) VALUES `
-  dummyPlanes.forEach((plan, index) => {
+  Planes.forEach((plan, index) => {
     query += `('${plan.nombre}', '${plan.color}', ${plan.valorMinimo}, ${plan.valorMaximo})`
-    if (index !== dummyPlanes.length - 1) { query += ',' }
+    if (index !== Planes.length - 1) { query += ',' }
   })
   await conn.query(query)
   conn.end()
 }
 export async function selectAllPlanes() {
   await createPlanesTable()
-  await insertDummyPlanes()
+  await insertPlanes()
   const conn = await mariaPool.getConnection()
   const result = await conn.query(`SELECT * FROM planes`)
   conn.end()
@@ -159,108 +243,118 @@ type auto = {
   nombre: string,
   valorComercial: number,
   plan?: number,
-  urlImagen: string
+  nombreImagen: string
 }
-const dummyAutos: auto[] = [
+const Autos: auto[] = [
   {
     nombre: "Nissan X-Trail 2022",
     valorComercial: 576000,
-    urlImagen: "nissan_x-trail_2022.jpeg"
+    nombreImagen: "nissan_x-trail_2022.jpg"
   },
   {
     nombre: "Nissan Versa 2022",
     valorComercial: 290000,
-    urlImagen: "nissan_versa_2022.jpg"
+    nombreImagen: "nissan_versa_2022.jpg"
   },
   {
     nombre: "Nissan March 2022",
     valorComercial: 216000,
-    urlImagen: "nissan_march_2022.jpg"
+    nombreImagen: "nissan_march_2022.jpg"
   },
   {
     nombre: "Nissan Kicks 2022",
     valorComercial: 384000,
-    urlImagen: "nissan_kicks_2022.jpg"
-  },
-  {
-    nombre: "Tesla Model Y",
-    valorComercial: 1418300,
-    urlImagen: "Tesla_Model_Y.jpeg"
-  },
-  {
-    nombre: "Nissan Frontier V6 Pro-4X 2022",
-    valorComercial: 979000,
-    urlImagen: "nissan_frontier_v6_pro-4x_2022.jpg"
-  },
-  {
-    nombre: "Nissan Frontier 2022",
-    valorComercial: 468000,
-    urlImagen: "nissan_frontier_2022.jpg"
+    nombreImagen: "nissan_kicks_2022.jpg"
   },
   {
     nombre: "Nissan Sentra 2022",
     valorComercial: 364000,
-    urlImagen: "nissan_sentra_2022.jpg"
+    nombreImagen: "nissan_sentra_2022.jpg"
   },
   {
-    nombre: "BMW Serie 7 xDrive",
-    valorComercial: 4190000.00,
-    urlImagen: "BMW_Serie_7_xDrive.jpg"
-  },
-  {
-    nombre: "Mercedes-AMG GT R",
-    valorComercial: 4538900.00,
-    urlImagen: "Mercedes_AMG_GT_R.jpg"
-  },
-  {
-    nombre: "Bentley Continental GT V8",
-    valorComercial: 5822199.00,
-    urlImagen: "Bentley_Continental_GT_V8.jpg"
-  },
-  {
-    nombre: "Lamborghini Aventador S",
-    valorComercial: 8272954.00,
-    urlImagen: "Lamborghini_Aventador_S.jpg"
-  },
-  {
-    nombre: "Ferrari SF90 Spyder",
-    valorComercial: 9518330.00,
-    urlImagen: "Ferrari_SF90_Spyder.jpg"
-  },
-  {
-    nombre: "Renault Kwid",
-    valorComercial: 181500.00,
-    urlImagen: "Renault_Kwid.jpeg"
-  },
-  {
-    nombre: "Chevrolet Beat",
-    valorComercial: 197400.00,
-    urlImagen: "ChevroletBeat.jpg"
-  },
-  {
-    nombre: "Hyundai Grand i10",
-    valorComercial: 201300.00,
-    urlImagen: "Hyundai_Grand_i10.jpg"
-  },
-  {
-    nombre: "Nissan V-Drive",
+    nombre: "Nissan V-Drive 2022",
     valorComercial: 203900.00,
-    urlImagen: "Nissan_V_Drive.jpg"
+    nombreImagen: "nissan_v_drive_2022.jpg"
   },
   {
-    nombre: "Volkswagen Gol",
+    nombre: "Nissan Frontier 2022",
+    valorComercial: 468000,
+    nombreImagen: "nissan_frontier_2022.jpg"
+  },
+  {
+    nombre: "Tesla Model Y",
+    valorComercial: 1418300,
+    nombreImagen: "tesla_model_y.jpg"
+  },
+  {
+    nombre: "BMW Serie 7 xDrive 2022",
+    valorComercial: 4190000.00,
+    nombreImagen: "bmw_serie_7_xDrive_2022.jpg"
+  },
+  {
+    nombre: "Mercedes-AMG GT R 2020",
+    valorComercial: 4538900.00,
+    nombreImagen: "mercedes-amg_gt_r_2020.jpg"
+  },
+  {
+    nombre: "Bentley Continental GT V8 2020",
+    valorComercial: 5822199.00,
+    nombreImagen: "bentley_continental_gt_v8_2020.jpg"
+  },
+  {
+    nombre: "Lamborghini Aventador S 2017",
+    valorComercial: 8272954.00,
+    nombreImagen: "lamborghini_aventador_s_2017.jpg"
+  },
+  {
+    nombre: "Ferrari SF90 Spyder 2016",
+    valorComercial: 9518330.00,
+    nombreImagen: "ferrari_sf90_spyder_2016.jpg"
+  },
+  {
+    nombre: "Renault Kwid 2022",
+    valorComercial: 181500.00,
+    nombreImagen: "renault_kwid_2022.jpg"
+  },
+  {
+    nombre: "Chevrolet Beat 2022",
+    valorComercial: 197400.00,
+    nombreImagen: "chevrolet_beat_2022.jpg"
+  },
+  {
+    nombre: "Hyundai Grand i10 2022",
+    valorComercial: 201300.00,
+    nombreImagen: "hyundai_grand_i10_2022.jpg"
+  },
+  {
+    nombre: "Volkswagen Gol 2022",
     valorComercial: 205990.00,
-    urlImagen: "Volkswagen_Gol.jpg"
+    nombreImagen: "volkswagen_gol_2022.jpg"
   },
   {
-    nombre: "Chevrolet Beat Notchback",
-    valorComercial: 206800.00,
-    urlImagen: "Chevrolet_Beat_Notchback.jpg"
+    nombre: 'Volkswagen Vitrus 2022',
+    valorComercial: 334990.00,
+    nombreImagen: 'volkswagen_vitrus_2022.jpg'
   },
   {
-    nombre: "Sentra sense MT 22",
-    valorComercial: 363900.00,
-    urlImagen: "Sentra_sense_MT_22.jpg"
+    nombre: 'Volkswagen Jetta 2022',
+    valorComercial: 379990.00,
+    nombreImagen: 'volkswagen_jetta_2022.jpg'
+  },
+  {
+    nombre: 'Volkswagen Vento 2022',
+    valorComercial: 272990.00,
+    nombreImagen: 'volkswagen_vento_2022.jpg'
+  },
+  {
+    nombre: 'Ford Maverick 2022',
+    valorComercial: 647500.00,
+    nombreImagen: 'ford_maverick_2022.jpg'
+  },
+  {
+    nombre: 'Ford Ranger 2022',
+    valorComercial: 532300.00,
+    nombreImagen: 'ford_ranger_2022.jpg'
   }
 ]
 
@@ -272,7 +366,7 @@ export async function createAutosPlanView() {
     autos.clave,
     autos.nombre,
     autos.valorComercial,
-    autos.urlImagen,
+    autos.nombreImagen,
     planes.id as plan
   FROM
     autos
@@ -291,18 +385,18 @@ export async function createAutosTable() {
   clave INT NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(200),
   valorComercial INT,
-  urlImagen VARCHAR(200),
+  nombreImagen VARCHAR(200),
   PRIMARY KEY(clave)
 );`)
   conn.end()
 }
-export async function insertDummyAutos() {
+export async function insertAutos() {
   const conn = await mariaPool.getConnection()
   await conn.query(`TRUNCATE TABLE autos`)
-  let query = `INSERT INTO autos (nombre, valorComercial, urlImagen) VALUES `
-  dummyAutos.forEach((auto, index) => {
-    query += `('${auto.nombre}', ${auto.valorComercial}, '${auto.urlImagen}')`
-    if (index !== dummyAutos.length - 1) { query += ',' }
+  let query = `INSERT INTO autos (nombre, valorComercial, nombreImagen) VALUES `
+  Autos.forEach((auto, index) => {
+    query += `('${auto.nombre}', ${auto.valorComercial}, '${auto.nombreImagen}')`
+    if (index !== Autos.length - 1) { query += ',' }
   })
   await conn.query(query)
   conn.end()
