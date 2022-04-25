@@ -1,13 +1,10 @@
 <script setup lang="ts">
-// menu like quasar
-const slots = useSlots()
 const target = ref(null)
 const targetBounding = useElementBounding(target)
 const windowSize = useWindowSize()
 const menu = ref(null)
 const menuBounding = useElementBounding(menu)
 const { x, y, sourceType } = useMouse()
-// const { isOutside } = useMouseInElement(menu)
 const isOutside = computed(() => {
   const { left, top, width, height } = menuBounding
   const { width: windowWidth, height: windowHeight } = windowSize
@@ -24,18 +21,14 @@ const isTargetFullyVisible = computed(() => targetBounding.bottom.value > window
 </script>
 
 <template>
-    <div ref="menu" class="relative">
-        <slot name="head" />
-        <div
-            ref="target"
-            class="absolute z-10 my-2"
-            :class="{
-                'invisible': isOutside,
-                'top-full': isTargetFullyVisible,
-                'bottom-full': !isTargetFullyVisible
-            }"
-        >
-            <slot name="menu" />
-        </div>
+  <div ref="menu" class="relative">
+    <slot name="head" />
+    <div ref="target" class="absolute z-10 my-2" :class="{
+      'invisible': isOutside,
+      'top-full': isTargetFullyVisible,
+      'bottom-full': !isTargetFullyVisible
+    }">
+      <slot name="menu" />
     </div>
+  </div>
 </template>
